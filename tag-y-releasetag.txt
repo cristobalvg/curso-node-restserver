@@ -1,0 +1,8 @@
+Aquí podrías ver una explicación detallada con links a recursos externos: https://stackoverflow.com/a/18512221.
+
+
+Pero la explicación resumida, un tag apunta a un commit específico, y puede tener cierta información adicional, además que es un concepto de git.
+
+Un release tag es un concepto de GitHub, que creamos sobre un tag existente, y este expondría las release note y los links de descarga del software/código fuente de una forma sencilla.
+
+Una plantilla de inicio para construir una API RESTful con TypeScript y Express: https://github.com/MarcosAlanya19/node-ts-restapi-template
