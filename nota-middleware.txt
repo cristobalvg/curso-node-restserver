@@ -1,0 +1,28 @@
+Sabemos que es un middleware, porque los middleware se usan así: app.use, el app.use significa que es un middleware.
+
+Pregunta de un estudiante del curos de node de la clase 111
+Tengo 2 preguntas, ayuda!!! Por favor :D
+Marsal · Lecture 111 · 2 years ago
+Hola Fernando.
+
+Terminé ya tu curso, estoy practicando y me encontré con 2 dudas.
+
+1. ¿Cuál es el criterio para poner las validaciones en los middlewares o en los controladores?
+
+Ejemplo:
+
+Middleware: valido JWT, id de monggose valido
+
+Controlador: valido usuario existe, valido esquema (email, password, etc)
+
+¿Porqué poner una o otra lógica en el uno o en el otro?
+
+2. ¿Express-validator o Joi para validación?
+
+Un amigo que ya está trabajando con Node, me aconseja estudiar Joi por sobre Express-validator. Con lo que tú enseñas de Express-validator logré todo sin problema, pero me dice que Joi es más usado. Traté de unir Joi, con otros middlewares sin usar express-validator y me hice todo un lío. Se que tu recomendacion sería, "usar lo que ya se... " jeje. Pero quisiera saber si me puedes recomendar algun sitio o bibliografía o subir tú un módulo con Joi e integrarlo con los middlewares de validación.
+
+Disculpa la pregunta tan larga.
+
+Te agradezco mucho tu ayuda.
+
+Disfruté mucho tu curso, genial trabajo!!!

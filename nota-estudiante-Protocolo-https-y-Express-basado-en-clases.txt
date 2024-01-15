@@ -1,0 +1,107 @@
+Buenas Noches: mi duda era como implementar en en mi REST API el protocolo https, con certificados auto firmados, si bien en la nube hay montón de soluciones, creo que ninguna abarcaba el tema de express basado en clases y https, bueno entonces este mi aporte al curso, debo puntualizar que estoy llevando el curso en Ubuntu 20.04 junto a TypeScript
+
+1.- Crear un certificado auto firmado es básicamente crear 2 archivos file.key, file.crt yo genere los míos con ayuda de esta página https://noviello.it/es/como-crear-un-certificado-ssl-autofirmado-en-linux/ mas información de como crear certificados digitales lo pueden encontrar en https://www.openssl.org/
+
+2.- Base mi solución en la 1ra de respuesta de stackoverflow a la consulta https://stackoverflow.com/questions/11744975/enabling-https-on-express-js que muestra claramente donde colocar nuestros archivos KEY y CRT y ademas de eso muestran también que se pueden servir juntos  http con https
+
+var fs = require('fs');
+var http = require('http');
+var https = require('https');
+var privateKey  = fs.readFileSync('sslcert/server.key', 'utf8');
+var certificate = fs.readFileSync('sslcert/server.crt', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
+var express = require('express');
+var app = express();
+ 
+// your express configuration here
+var httpServer = http.createServer(app);
+var httpsServer = https.createServer(credentials, app);
+ 
+httpServer.listen(8080);
+httpsServer.listen(8443);
+
+
+3.- Este sería mi código TS del archivo models/server.ts  donde https se sirve por el puerto 3001 y por el puerto 3000 http normal
+
+import express, { Application } from 'express';
+import cors, { CorsOptions } from 'cors';
+ 
+import rutasPredio from '../routes/predios.route';
+import db from '../database/conexion';
+ 
+import fs from 'fs';
+import https from 'https';
+import http from 'http';
+ 
+class Server {
+  private app         : Application;
+  private portn       : string; //puerto http
+  private ports       : string; //puerto https
+  private privatekey  = fs.readFileSync('sslcert/minode.key','utf-8');
+  private certificate = fs.readFileSync('sslcert/minode.crt','utf-8');
+  private apiPredios  = { predios: '/api/predios' };
+  private credenciales = {
+    key:this.privatekey, 
+    cert: this.certificate
+  }
+ 
+  private httpsServer : https.Server;
+  private httpServer  : http.Server;
+ 
+  constructor() {
+    this.app = express();
+    this.httpServer  = http.createServer(this.app);
+    this.httpsServer = https.createServer(this.credenciales, this.app);
+    this.portn = process.env.PORTN || '3000';
+    this.ports = process.env.PORTS || '3001';
+ 
+    //base de datos
+    this.dbConnection();
+    //middlewares
+    this.middlewares();
+    //definiendo rutas
+    this.routes();
+  }
+ 
+  //middlewares
+  middlewares(){
+    //coors
+    const origenes_autorizados = ['http://localhost:4200','http://localhost:3000','https://localhost:3001'];
+    const opciones: CorsOptions = {
+      origin: origenes_autorizados
+    };
+    this.app.use(cors( opciones ));
+    //lectura de Body
+    this.app.use( express.json() );
+    //carpeta publica
+    this.app.use(express.static('public'));
+  }
+ 
+  //base de datos conexion 
+  async dbConnection (){
+    try {
+      await db.authenticate();
+      await db.query("exec set_current_version 'Calidad'");
+      console.log('Data base online');   
+    } catch (error) {
+      console.log(error);
+      process.exit();
+    }
+  }
+ 
+  //rutas
+  routes(){
+    this.app.use(this.apiPredios.predios, rutasPredio )
+  }
+ 
+  listen (){
+    this.httpServer.listen(this.portn, ()=>{
+      console.log(`Servidor http Corriendo en el puerto ${this.portn}!!`);
+    });
+    this.httpsServer.listen(this.ports, ()=>{
+      console.log(`Servidor https Corriendo en el puerto ${this.ports}!!`);
+    });
+  }
+}
+ 
+export default Server;

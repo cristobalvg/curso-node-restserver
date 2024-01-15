@@ -1,0 +1,1 @@
+Los argumentos que se colocan en el url, estos los podríamos conocer como parámetros de segmento y podemos tener tantos argumentos como necesitemos en el URL.

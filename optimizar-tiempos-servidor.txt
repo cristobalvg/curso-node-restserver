@@ -1,0 +1,25 @@
+Pregunta de un estudiante de como optimizar los tiempos de respuesta en una situación en particular de su servidor: 
+
+Como optimizar tiempos de respuesta del servidor?
+Julio Cesar Solano · Lecture 113 · 1 year ago
+Buenos días, mi pregunta es algo general, espero alguien me pueda ayudar.
+
+He seguido el curso sin mayores problemas, logrando implementar lo propuesto en los ejemplos y aplicándolo a un proyecto personal.
+
+Tengo una base de datos en MongoDB donde tengo que hacer una consulta a una colección que arroja como resultado cerca de 100mil registros con unos 15 campos cada uno, del lado del servidor obtengo respuesta  entre 3 a 5 segundos pero en el frontend que tengo en angular la respuesta tarda minutos en reflejarse.
+
+He buscado en varias partes, realizado pruebas de distintas maneras pero no logro mejorar los tiempos.
+
+Alguien me puede indicar como puedo optimizar los tiempos de respuesta? o donde puedo buscar información al respecto?
+Gracias
+
+
+Jose
+1 year ago
+Hola Julio, te he dejado una respuesta en otro de los cursos, te la dejo por aquí:
+
+El inconveniente, en este caso, no se trata del frontend, ni del framework. Lo mejor en este caso es paginar la respuesta desde el server, el usuario final no verá los 100 mil registros de un vistazo, a lo mucho podrá ver 20 registros por página. Generalmente, hará scroll o pasará a la siguiente página.
+
+Esto lo puedes aprovechar para reducir la respuesta del server, y mostrar los datos a una velocidad aceptable.
+
+Espero te ayude la respuesta. Saludos.

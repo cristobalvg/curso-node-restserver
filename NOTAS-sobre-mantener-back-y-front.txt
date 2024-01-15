@@ -1,0 +1,33 @@
+Hola, Para proyectos reales a la hora de mantener el Frontend y el Backend por separado, ¿es mejor hacer un Create-react-app y un nmp int por separados? osea dos carpetas por separado o todo junto en una sola carpeta. ¿Cual seria la mejor opción? 
+
+en la de front-myProject hago npm run build, lo que me crea una carpeta build con el html css y js de mi proyecto de react pero ya compilado, y eso lo meto en el folder del back-myProject y renderizo el index.html que me genera react con un res.sendFile en la ruta '*/', y al final subo solo la carpeta de back-myProject, pero no estoy seguro si es la mejor forma. Otra forma sería subir el back a un servidor y el front a otro.
+
+
+Fernando — Instructor
+1 upvote
+3 years ago
+Saludos Angel,
+
+Añadiendo a lo que te contestó Ricardo, si te recomiendo tenerlos por separado, cuando la app de React este terminada o lista para subir, simplemente generas el producto del build de react y luego lo subes al directorio public o donde lo necesites, pero no trabajes el backend y frontend en el mismo proyecto.
+
+Porque muchas veces te tocará actualizar el backend pero el frontend es igual, o puede que suceda lo opuesto
+
+DB
+Daniel
+0 upvotes
+3 years ago
+Buenas Fernando, ¿qué tipo de arquitectura estamos siguiendo al hacer una aplicación con el stack MEAN?, ¿cliente-servidor?, ¿tener el front y el back separados o juntos responde a algún tipo de arquitectura en concreto según como los tengas?.
+
+
+
+Un saludo
+
+
+Jose
+0 upvotes
+2 years ago
+Hola Daniel.
+
+Si utilizas un framework como react - angular -vue etc. Sera una arquitectura Cliente - Servidor, donde se realizan peticiones desde multiples clientes (que se ejecutan en el navegador) al servidor.
+
+Esta arquitectura se adapta a casos que el frontend y backend estén juntos o separados ya que el frontend se ejecutara (renderiza) en el navegador y se comunica con el servidor a través de conexiones http. Saludos.

@@ -1,0 +1,3 @@
+Usualmente con un método POST, PUT inclusive el DELETE, nosotros podemos mandar un body en la petición http, que se puede ver en la barra horizontal del postman, al lado derecho del headers.
+
+En mi caso lo siguiente no fue necesario hacerlo, pero puede ser de utilidad en algún momento si es que no me llegara a funcionar =>: Si lo parámetros enviado no se logran ver en el backend, debe establecer un parámetro en la cabecera de la aplicación en postman. Ingresas a postman, le das click en la ventana headers y estableces donde dice key Content-Type y donde dice value application/json de esta forma les está diciendo a POSTMAN que enviaras datos a ese endpoint de tipo JSON.

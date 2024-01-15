@@ -1,0 +1,23 @@
+el CORSs nos permite a nosotros poder proteger nuestro servidor de una manera relativamente
+
+superficial, pero muchos navegadores web como Google, Chrome, Firefox les van a dar errores si el
+
+Cours no está habilitado y ustedes intentan llamar su endpoint.
+
+posiblemente ustedes van a querer que su API, sólo ciertas páginas web puedan acceder a ella,
+
+o van a querer que todo el mundo pueda acceder a su red API.
+
+Usualmente ustedes siempre van a tener que configurar el CORS, a menos que, el caso contrario como les dije, que su aplicación vaya a correr internamente y que todas las peticiones salgan del mismo lugar.
+
+Para el desarrollo es correcto permitir todos los origin, ya que hasta el momento no hay información sensible.
+
+Para tu despliegue a producción de sitio, si que necesitas una whitelist o configurar tu origin para evitar los origins cruzados.
+
+Todo esto lo puedes aplicar como estrategia de seguridad para tu sitio.
+
+El bloqueo por CORS siempre son de parte del servidor (backend). Aunque el cliente front-end puede influir en el bloqueo con el envió de algunos parámetros.
+
+Generalmente el bloqueo por CORS sucede porque tu dominio (origin) del cliente, por ejemplo "http://localhost:4200" no tiene autorización para conectarse al servidor.
+
+Esto lo debes configurar en tu server
